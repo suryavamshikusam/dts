@@ -1,5 +1,7 @@
 /* 1. TAILWIND CORE INJECTIONS */
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* 2. YOUR CUSTOM ROOT VARIABLE OVERRIDES */
 :root {
