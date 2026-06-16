@@ -15,6 +15,7 @@ export default function App() {
   const horizontalItemsRef = useRef(null);
   
   const [activeTab, setActiveTab] = useState('capabilities');
+  const [activeSection, setActiveSection] = useState('');
   const [lenis, setLenis] = useState(null);
 
   useEffect(() => {
@@ -32,7 +33,32 @@ export default function App() {
       lenisInstance.raf(time * 1000);
     });
 
+    const handleScroll = () => {
+      const sections = ['about', 'features', 'industries', 'company'];
+      const scrollPosition = window.scrollY + 200; // Offset for header + buffer
+
+      let current = '';
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            current = section;
+          }
+        }
+      }
+      if (current) {
+        setActiveSection(current);
+      } else if (window.scrollY < 100) {
+        setActiveSection('');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
     return () => {
+      window.removeEventListener('scroll', handleScroll);
       lenisInstance.destroy();
       gsap.ticker.remove(lenisInstance.raf);
     };
@@ -151,10 +177,22 @@ export default function App() {
           </div>
           
           <div className="hidden lg:flex items-center gap-8 font-medium text-sm text-slate-600">
-            <a href="#about" onClick={(e) => handleNavClick(e, '#about')} className="hover:text-[#1b4cda] transition-colors">What is DTTS?</a>
-            <a href="#features" onClick={(e) => handleNavClick(e, '#features')} className="hover:text-[#1b4cda] transition-colors">Features</a>
-            <a href="#industries" onClick={(e) => handleNavClick(e, '#industries')} className="hover:text-[#1b4cda] transition-colors">Industries</a>
-            <a href="#company" onClick={(e) => handleNavClick(e, '#company')} className="hover:text-[#1b4cda] transition-colors">Company</a>
+            <a href="#about" onClick={(e) => handleNavClick(e, '#about')} className={`relative hover:text-[#1b4cda] transition-colors py-1 ${activeSection === 'about' ? 'text-[#1b4cda]' : ''}`}>
+              What is DTTS?
+              <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#1b4cda] rounded-full transition-transform duration-300 origin-left ${activeSection === 'about' ? 'scale-x-100' : 'scale-x-0'}`}></span>
+            </a>
+            <a href="#features" onClick={(e) => handleNavClick(e, '#features')} className={`relative hover:text-[#1b4cda] transition-colors py-1 ${activeSection === 'features' ? 'text-[#1b4cda]' : ''}`}>
+              Features
+              <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#1b4cda] rounded-full transition-transform duration-300 origin-left ${activeSection === 'features' ? 'scale-x-100' : 'scale-x-0'}`}></span>
+            </a>
+            <a href="#industries" onClick={(e) => handleNavClick(e, '#industries')} className={`relative hover:text-[#1b4cda] transition-colors py-1 ${activeSection === 'industries' ? 'text-[#1b4cda]' : ''}`}>
+              Industries
+              <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#1b4cda] rounded-full transition-transform duration-300 origin-left ${activeSection === 'industries' ? 'scale-x-100' : 'scale-x-0'}`}></span>
+            </a>
+            <a href="#company" onClick={(e) => handleNavClick(e, '#company')} className={`relative hover:text-[#1b4cda] transition-colors py-1 ${activeSection === 'company' ? 'text-[#1b4cda]' : ''}`}>
+              Company
+              <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#1b4cda] rounded-full transition-transform duration-300 origin-left ${activeSection === 'company' ? 'scale-x-100' : 'scale-x-0'}`}></span>
+            </a>
           </div>
 
           <div className="flex items-center">
