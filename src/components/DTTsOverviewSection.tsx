@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 
 export function DTTsOverviewSection() {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLElement>(null);
   
   // Hover 3D effect variables
   const mouseX = useMotionValue(0);
@@ -12,6 +12,7 @@ export function DTTsOverviewSection() {
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-15, 15]), { stiffness: 150, damping: 20 });
 
   const handleMouseMove = (e: any) => {
+    if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
