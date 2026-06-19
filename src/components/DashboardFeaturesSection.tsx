@@ -122,98 +122,133 @@ export function DashboardFeaturesSection() {
   const activeData = tabContent[activeTab as keyof typeof tabContent];
 
   return (
-    <section className="w-full bg-white text-black py-24 border-t border-gray-100 font-sans">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+    <section className="relative w-full bg-[#050505] text-white py-24 md:py-32 font-sans overflow-hidden border-t border-white/5">
+      {/* Background Glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#0055FF]/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16 z-10">
         
         {/* Section Title */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block px-4 py-1.5 rounded-full border border-[#0055FF]/30 bg-[#0055FF]/10 text-[#0055FF] text-sm font-bold tracking-wide mb-6 uppercase shadow-[0_0_15px_rgba(0,85,255,0.2)]"
+          >
+            Capabilities
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg"
+          >
             Powerful Platform Features
-          </h2>
-          <p className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
+          >
             Everything you need to seamlessly track, manage, and optimize your entire tool inventory from one unified dashboard.
-          </p>
+          </motion.p>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex flex-wrap justify-center sm:justify-start border-b border-gray-200 mb-16 gap-x-8 gap-y-4">
-          {tabs.map((tab) => {
-            const isActive = activeTab === tab.id;
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`relative pb-4 flex items-center gap-2 text-lg font-medium transition-colors ${
-                  isActive ? 'text-blue-600' : 'text-gray-500 hover:text-gray-900'
-                }`}
-              >
-                <Icon className={`w-5 h-5 ${isActive ? 'text-blue-600' : 'text-gray-400'}`} />
-                {tab.label}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeTabIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-              </button>
-            );
-          })}
+        {/* Tab Navigation (Glassmorphic Pills) */}
+        <div className="flex justify-center mb-16 w-full">
+          <div className="flex flex-wrap justify-center bg-white/5 backdrop-blur-xl p-2 rounded-2xl border border-white/10 gap-2 max-w-full shadow-2xl shadow-black/50">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.id;
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`relative px-5 md:px-7 py-3.5 rounded-xl flex items-center gap-2.5 text-sm md:text-base font-medium transition-all duration-300 ${
+                    isActive ? 'text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTabBackground"
+                      className="absolute inset-0 bg-gradient-to-r from-[#0055FF] to-blue-600 rounded-xl"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10 flex items-center gap-2">
+                    <Icon className={`w-4 h-4 md:w-5 md:h-5 ${isActive ? 'text-white' : 'text-gray-400'}`} />
+                    {tab.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Side: Features List */}
-          <div className="lg:col-span-5 flex flex-col gap-8 mt-2">
+          <div className="lg:col-span-5 flex flex-col gap-4">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
-                initial={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-col gap-6"
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="flex flex-col gap-4"
               >
                 {activeData.features.map((feature, idx) => (
-                  <div key={idx} className="group cursor-pointer flex gap-4">
-                    <div className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-600 group-hover:scale-150 transition-transform" />
-                    <div>
-                      <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
-                        {feature.title}
-                      </h3>
-                      <p className="text-gray-500 text-sm leading-relaxed">
-                        {feature.desc}
-                      </p>
-                    </div>
-                  </div>
+                  <motion.div 
+                    key={idx} 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="group cursor-pointer p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-[#0055FF]/40 hover:bg-white/[0.06] transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(0,85,255,0.1)]"
+                  >
+                    <h3 className="text-lg md:text-xl font-semibold text-white mb-2 group-hover:text-[#0055FF] transition-colors flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-[#0055FF] shadow-[0_0_10px_rgba(0,85,255,0.8)]" />
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm md:text-base leading-relaxed pl-5">
+                      {feature.desc}
+                    </p>
+                  </motion.div>
                 ))}
               </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Right Side: Image Display */}
-          <div className="lg:col-span-7">
-            <div className="bg-gray-50/50 rounded-2xl p-2 sm:p-4 border border-gray-100">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTab}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}
-                  className="rounded-xl overflow-hidden shadow-lg border border-gray-100/50 bg-white"
-                >
-                  <img 
-                    src={activeData.imageUrl} 
-                    alt={activeTab} 
-                    className="w-full h-auto object-cover" 
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
+          <div className="lg:col-span-7 relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                transition={{ duration: 0.5, type: "spring", bounce: 0.2 }}
+                className="relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 bg-white/5 group"
+              >
+                {/* Glossy overlay effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10" />
+                <img 
+                  src={activeData.imageUrl} 
+                  alt={activeTab} 
+                  className="w-full h-auto object-cover transform group-hover:scale-[1.03] transition-transform duration-700" 
+                />
+              </motion.div>
+            </AnimatePresence>
+            
+            {/* Decorative element */}
+            <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-[#0055FF]/20 rounded-full blur-[100px] pointer-events-none z-[-1]" />
           </div>
 
         </div>
