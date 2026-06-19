@@ -4,7 +4,6 @@ import FadeIn from './components/FadeIn'
 import { DashboardFeaturesSection } from './components/DashboardFeaturesSection'
 import { DTTsOverviewSection } from './components/DTTsOverviewSection'
 import { IndustryChallengesSection } from './components/IndustryChallengesSection'
-import { MedicalIndustrySection } from './components/MedicalIndustrySection'
 import { AboutUsSection } from './components/AboutUsSection'
 import { FooterSection } from './components/FooterSection'
 import ContactModal from './components/ContactModal'
@@ -92,7 +91,6 @@ export default function App() {
       </div>
 
       <IndustryChallengesSection />
-      <MedicalIndustrySection />
 
       {/* About Us Section */}
       <div id="about">
