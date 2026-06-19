@@ -122,7 +122,7 @@ export function DashboardFeaturesSection() {
   const activeData = tabContent[activeTab as keyof typeof tabContent];
 
   return (
-    <section className="relative w-full bg-[#050505] text-white py-24 md:py-32 font-sans overflow-hidden border-t border-white/5">
+    <section className="relative w-full bg-[#050505] text-white py-16 md:py-20 font-sans overflow-hidden border-t border-white/5">
       {/* Background Glows */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#0055FF]/20 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
@@ -130,12 +130,12 @@ export function DashboardFeaturesSection() {
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16 z-10">
         
         {/* Section Title */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full border border-[#0055FF]/30 bg-[#0055FF]/10 text-[#0055FF] text-sm font-bold tracking-wide mb-6 uppercase shadow-[0_0_15px_rgba(0,85,255,0.2)]"
+            className="inline-block px-3 py-1 rounded-full border border-[#0055FF]/30 bg-[#0055FF]/10 text-[#0055FF] text-xs font-bold tracking-wide mb-4 uppercase shadow-[0_0_15px_rgba(0,85,255,0.2)]"
           >
             Capabilities
           </motion.div>
@@ -144,7 +144,7 @@ export function DashboardFeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-4 drop-shadow-lg"
           >
             Powerful Platform Features
           </motion.h2>
@@ -153,15 +153,15 @@ export function DashboardFeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed"
+            className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed"
           >
             Everything you need to seamlessly track, manage, and optimize your entire tool inventory from one unified dashboard.
           </motion.p>
         </div>
 
         {/* Tab Navigation (Glassmorphic Pills) */}
-        <div className="flex justify-center mb-16 w-full">
-          <div className="flex flex-wrap justify-center bg-white/5 backdrop-blur-xl p-2 rounded-2xl border border-white/10 gap-2 max-w-full shadow-2xl shadow-black/50">
+        <div className="flex justify-center mb-12 w-full">
+          <div className="flex flex-wrap justify-center bg-white/5 backdrop-blur-xl p-1.5 rounded-2xl border border-white/10 gap-1.5 max-w-full shadow-xl shadow-black/50">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
               const Icon = tab.icon;
@@ -169,7 +169,7 @@ export function DashboardFeaturesSection() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`relative px-5 md:px-7 py-3.5 rounded-xl flex items-center gap-2.5 text-sm md:text-base font-medium transition-all duration-300 ${
+                  className={`relative px-4 md:px-5 py-2 md:py-2.5 rounded-xl flex items-center gap-2 text-xs md:text-sm font-medium transition-all duration-300 ${
                     isActive ? 'text-white shadow-lg' : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
                   }`}
                 >
@@ -181,8 +181,8 @@ export function DashboardFeaturesSection() {
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
-                  <span className="relative z-10 flex items-center gap-2">
-                    <Icon className={`w-4 h-4 md:w-5 md:h-5 ${isActive ? 'text-white' : 'text-gray-400'}`} />
+                  <span className="relative z-10 flex items-center gap-1.5">
+                    <Icon className={`w-3.5 h-3.5 md:w-4 md:h-4 ${isActive ? 'text-white' : 'text-gray-400'}`} />
                     {tab.label}
                   </span>
                 </button>
@@ -192,10 +192,10 @@ export function DashboardFeaturesSection() {
         </div>
 
         {/* Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
           {/* Left Side: Features List */}
-          <div className="lg:col-span-5 flex flex-col gap-4">
+          <div className="lg:col-span-5 flex flex-col gap-3">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -203,7 +203,7 @@ export function DashboardFeaturesSection() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="flex flex-col gap-4"
+                className="flex flex-col gap-3"
               >
                 {activeData.features.map((feature, idx) => (
                   <motion.div 
@@ -211,13 +211,13 @@ export function DashboardFeaturesSection() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className="group cursor-pointer p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-[#0055FF]/40 hover:bg-white/[0.06] transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(0,85,255,0.1)]"
+                    className="group cursor-pointer p-4 md:p-5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-[#0055FF]/40 hover:bg-white/[0.06] transition-all duration-300 shadow-md hover:shadow-[0_0_15px_rgba(0,85,255,0.1)]"
                   >
-                    <h3 className="text-lg md:text-xl font-semibold text-white mb-2 group-hover:text-[#0055FF] transition-colors flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-[#0055FF] shadow-[0_0_10px_rgba(0,85,255,0.8)]" />
+                    <h3 className="text-base md:text-lg font-semibold text-white mb-1.5 group-hover:text-[#0055FF] transition-colors flex items-center gap-2.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#0055FF] shadow-[0_0_8px_rgba(0,85,255,0.8)]" />
                       {feature.title}
                     </h3>
-                    <p className="text-gray-400 text-sm md:text-base leading-relaxed pl-5">
+                    <p className="text-gray-400 text-xs md:text-sm leading-relaxed pl-4">
                       {feature.desc}
                     </p>
                   </motion.div>
@@ -235,20 +235,20 @@ export function DashboardFeaturesSection() {
                 animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                 exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
                 transition={{ duration: 0.5, type: "spring", bounce: 0.2 }}
-                className="relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 bg-white/5 group"
+                className="relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.4)] border border-white/10 bg-white/5 group mt-2"
               >
                 {/* Glossy overlay effect */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10" />
                 <img 
                   src={activeData.imageUrl} 
                   alt={activeTab} 
-                  className="w-full h-auto object-cover transform group-hover:scale-[1.03] transition-transform duration-700" 
+                  className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700" 
                 />
               </motion.div>
             </AnimatePresence>
             
             {/* Decorative element */}
-            <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-[#0055FF]/20 rounded-full blur-[100px] pointer-events-none z-[-1]" />
+            <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-[#0055FF]/20 rounded-full blur-[80px] pointer-events-none z-[-1]" />
           </div>
 
         </div>
