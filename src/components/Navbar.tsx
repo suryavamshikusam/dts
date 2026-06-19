@@ -15,16 +15,6 @@ export default function Navbar() {
         { name: 'Roles, Approvals & Audit', href: '#features', event: 'change-features-tab', detail: 'approvals' },
       ]
     },
-    { 
-      name: 'Workflow', 
-      href: '#workflow',
-      subItems: [
-        { name: 'Tool Order Flow', href: '#workflow', event: 'change-workflow-tab', detail: 'tool-order' },
-        { name: 'Repair Flow', href: '#workflow', event: 'change-workflow-tab', detail: 'repair' },
-        { name: 'Calibration Flow', href: '#workflow', event: 'change-workflow-tab', detail: 'calibration' },
-      ]
-    },
-    { name: 'Security', href: '#security' },
     { name: 'About Us', href: '#about' }
   ];
 

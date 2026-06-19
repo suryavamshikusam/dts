@@ -2,11 +2,9 @@ import Navbar from './components/Navbar'
 import AnimatedHeading from './components/AnimatedHeading'
 import FadeIn from './components/FadeIn'
 import { DashboardFeaturesSection } from './components/DashboardFeaturesSection'
-import { WorkFlowSection } from './components/WorkFlowSection'
 import { DTTsOverviewSection } from './components/DTTsOverviewSection'
 import { IndustryChallengesSection } from './components/IndustryChallengesSection'
 import { MedicalIndustrySection } from './components/MedicalIndustrySection'
-import { SecuritySection } from './components/SecuritySection'
 import { AboutUsSection } from './components/AboutUsSection'
 import { FooterSection } from './components/FooterSection'
 import ContactModal from './components/ContactModal'
@@ -95,16 +93,6 @@ export default function App() {
 
       <IndustryChallengesSection />
       <MedicalIndustrySection />
-      
-      {/* Workflow Section */}
-      <div id="workflow">
-        <WorkFlowSection />
-      </div>
-      
-      {/* Security Section */}
-      <div id="security">
-        <SecuritySection />
-      </div>
 
       {/* About Us Section */}
       <div id="about">
